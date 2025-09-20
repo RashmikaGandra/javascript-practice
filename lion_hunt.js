@@ -1,10 +1,18 @@
 const input = "L     Z";
-let index = 0;
 let space = 0;
-while (index < input.length) {
-    if(input[index] === " "){
-        space = space + 1;
+let newSpace;
+for (let index = 0 ; index < input.length ; index= index + 1) {
+    if(input[index] === "Z") {
+        if(input[index + 1] === "L") {
+            newSpace = 0;
+        }
     }
-    index = index + 1;
+    else if(input[index] === " ") {
+        space = space + 1;
+        
+    }
+}
+if (newSpace < space) {
+    space = newSpace;
 }
 console.log(space);
