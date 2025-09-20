@@ -1,2 +1,6 @@
 const input = "L     Z";
-console.log(5);
+let index = 0;
+while (index < input.length) {
+        console.log(input[index]);
+        index = index + 1;
+}
