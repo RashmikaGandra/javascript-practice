@@ -1,0 +1,8 @@
+input --- expectedOutput
+12         reverse of 12 is 21
+123        reverse of 123 is 321
+22         reverse of 22 is 22
+45         reverse of 45 is 54
+96         reverse of 96 is 69
+115        reverse of 115 is 511
+94         reverse of 94 is 49
