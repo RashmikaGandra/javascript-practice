@@ -8,11 +8,20 @@ function findLongestName(names, longestName = "", lengthToCompare = 0) {
 
   return "Longest name among all is :" + longestName;
 }
+ 
+function isValidInfo(names) {
+  if (names[0] === "") {
+    console.log("Enter valid names");
+    return takeNamesFromUser();
+  }
+
+  return findLongestName(names);
+}
 
 function takeNamesFromUser() {
   const names = prompt("Enter names to find largest one:");
   const allNames = names.split(" ");
-  const longestName = findLongestName(allNames);
+  const longestName = isValidInfo(allNames);
   return longestName;
 }
 
