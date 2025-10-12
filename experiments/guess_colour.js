@@ -11,7 +11,7 @@ function giveTheClue(colour) {
   switch (colour) {
     case "violet": return "Lavender dusk";
     case "indigo": return "strom sky";
-    case "blue" : return "slush drink";
+    case "blue" : return "clear sky";
     case "green" : return "Emerald Earth";
     case "yellow" : return "Honey beam";
     case "orange" : return "sunset";
