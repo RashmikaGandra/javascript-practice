@@ -6,7 +6,7 @@ function checkTheGuess(noOfTimes, guessedNumber, number) {
   if (guessedNumber > number) {
     console.log("Too High!");
   }
-  
+
   return play(noOfTimes - 1, number);
 }
 
@@ -14,12 +14,10 @@ function play(noOfTimes, number) {
   if (noOfTimes === 0) {
     console.log("The Number is:", number);
     console.log("☹️ Better luck next time");
+    return;
   }
-
-  for (let index = 0; index < noOfTimes; index++) {
-    const guessedNumber = parseInt(prompt("Guess the number"));
-    return checkTheGuess(noOfTimes, guessedNumber, number);
-  }
+  const guessedNumber = parseInt(prompt("Guess the number:"));
+  return checkTheGuess(noOfTimes, guessedNumber, number);
 }
 
 function guessNumber(randomNumber) {
