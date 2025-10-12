@@ -11,12 +11,13 @@ function checkTheGuess(noOfTimes, guessedNumber, number) {
 }
 
 function play(noOfTimes, number) {
-  if (noOfTimes === 0) {
+  const guessedNumber = parseInt(prompt("Guess the number:"));
+  if (noOfTimes === 1) {
     console.log("The Number is:", number);
     console.log("☹️ Better luck next time");
     return;
   }
-  const guessedNumber = parseInt(prompt("Guess the number:"));
+
   return checkTheGuess(noOfTimes, guessedNumber, number);
 }
 
@@ -28,7 +29,19 @@ function guessNumber(randomNumber) {
 
 function generateRandomNumber() {
   const randomNumber = Math.floor(Math.random() * 100);
-  guessNumber(randomNumber);
+  return guessNumber(randomNumber);
 }
 
-generateRandomNumber();
+function playAgain() {
+  const decision = confirm("Do you want to play again ?");
+  return decision;
+}
+
+function main() {
+  generateRandomNumber();
+  while (playAgain()) {
+    generateRandomNumber();
+  }
+}
+
+main();
