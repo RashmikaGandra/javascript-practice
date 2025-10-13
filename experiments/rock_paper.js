@@ -1,24 +1,36 @@
-function checkTheMoves(uesr1Move, uesr2Move) {
-  if (uesr1Move === uesr2Move) {
-    return "TIE....";
+function generatePoints(winner) {
+  let userPoints = 0;
+  let systemPoints = 0;
+  switch(winner) {
+    case "user" : userPoints++;
+    case "system" : systemPoints++;
   }
-  if (uesr1Move === 0 && uesr2Move === 1) {
-    return "system won";
+  const points = `${"user-Points"} : ${userPoints}  ${"system-points"} : ${systemPoints}`;
+  console.log(points);
+  return winner;
+}
+
+function checkTheMoves(userMove, systemMove) {
+  if (userMove === systemMove) {
+    return generatePoints("TIE");
   }
-  if (uesr1Move === 0 && uesr2Move === 2) {
-    return "user Won";
+  if (userMove === 0 && systemMove === 1) {
+    return generatePoints("system");
   }
-  if (uesr1Move === 1 && uesr2Move === 0) {
-    return "user Won";
+  if (userMove === 0 && systemMove === 2) {
+    return generatePoints("user");
   }
-  if (uesr1Move === 1 && uesr2Move === 2) {
-    return "system won";
+  if (userMove === 1 && systemMove === 0) {
+    return generatePoints("user");
   }
-  if (uesr1Move === 2 && uesr2Move === 0) {
-    return "system won";
+  if (userMove === 1 && systemMove === 2) {
+    return generatePoints("system");
   }
-  if (uesr1Move === 2 && uesr2Move === 1) {
-    return "user Won";
+  if (userMove === 2 && systemMove === 0) {
+    return generatePoints("system");
+  }
+  if (userMove === 2 && systemMove === 1) {
+    return generatePoints("user");
   }
 }
 
