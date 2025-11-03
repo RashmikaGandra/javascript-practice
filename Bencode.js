@@ -1,12 +1,12 @@
 function encodeArray(input) {
-  let result = "";
+  const encodedArray = [];
 
   for (let index = 0; index < input.length; index++) {
     let encodedData = encode(input[index]);
-    result += encodedData;
+    encodedArray.push(encodedData);
   }
 
-  return result;
+  return encodedArray.join("");
 }
 
 function encode(input) {
