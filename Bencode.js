@@ -1,5 +1,9 @@
 function encode(input) {
-  return "i" + input + "e";
+  if (typeof input === "number") {
+    return "i" + input + "e";
+  }
+
+  return input.length + ":" + input;
 }
 
 function composeMessage(description, actual, expected) {
@@ -7,8 +11,7 @@ function composeMessage(description, actual, expected) {
   let message = `\n${emoji} ${description} \n`;
 
   if (actual !== expected) {
-    message += `\n style is : ${style}
-    expected is : ${expected}
+    message += `expected is : ${expected}
     actual is : ${actual} \n`;
   }
 
@@ -34,4 +37,14 @@ function testsForIntegers() {
   encodeTheInput("negative two digit", -12, "i-12e");
 }
 
+function testsForStrings() {
+  console.log("Strings");
+  console.log(underline("Strings"));
+  encodeTheInput("empty string", "", "0:");
+  encodeTheInput("string", "hello", "5:hello");
+  encodeTheInput("string with spaces", "hello world", "11:hello world");
+  encodeTheInput("including special characters", "!hello#", "7:!hello#");
+}
+
 testsForIntegers();
+testsForStrings();
