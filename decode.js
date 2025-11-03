@@ -1,11 +1,24 @@
-function decode(input) {
-  const decodedData = input.slice(1, input.length);
+function decodeNumber(input) {
+  const decodedData = input.slice(1, input.length - 1);
   return parseInt(decodedData);
+}
+
+function decodeString(input) {
+  const index = input.indexOf(":");
+  return input.slice(index + 1);
+}
+
+function decode(input) {
+  switch (input[0]) {
+    case "i" : return decodeNumber(input);
+    case "l" : return decodeList(input);
+    default : return decodeString(input);
+  }
 }
 
 function composeMessage(description, actual, expected) {
   const emoji = actual === expected ? "✅" : "❌";
-  let message = `\n${emoji} ${description} \n`;
+  let message = `${emoji} ${description} \n`;
 
   if (actual !== expected) {
     message += `expected is : ${expected}
@@ -33,10 +46,20 @@ function testsForIntegers() {
   decodeTheInput("negative numbers", "i-45e", -45);
 }
 
+function testsForStrings() {
+  console.log("Strings");
+  console.log(underline("Strings"));
+  decodeTheInput("empty string", "0:", "");
+  decodeTheInput("string", "5:hello", "hello");
+  decodeTheInput("string with spaces", "11:hello world", "hello world");
+  decodeTheInput("including special characters", "7:!hello#", "!hello#");
+}
+
 function testsToDecode() {
   console.log("Decoding");
   console.log(underline("Decoding"));
   testsForIntegers();
+  testsForStrings();
 }
 
 testsToDecode();
