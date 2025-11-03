@@ -8,6 +8,11 @@ function decodeString(input) {
   return input.slice(index + 1);
 }
 
+function decodeList(input) {
+  const decodedArray = [];
+  return decodedArray;
+}
+
 function decode(input) {
   switch (input[0]) {
     case "i" : return decodeNumber(input);
@@ -16,8 +21,38 @@ function decode(input) {
   }
 }
 
+function isArray(x) {
+  return typeof x === 'object';
+}
+
+function areArraysEqual(array1, array2) {
+  if (array1.length !== array2.length) {
+    return false;
+  }
+
+  for (let index = 0; index < array1.length; index++) {
+    if (!areDeepEqual(array1[index], array2[index])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function areDeepEqual(array1, array2) {
+  if (typeof array1 !== typeof array2) {
+    return false;
+  }
+
+  if (isArray(array1) && isArray(array2)) {
+    return areArraysEqual(array1, array2);
+  }
+
+  return array1 === array2;
+}
+
 function composeMessage(description, actual, expected) {
-  const emoji = actual === expected ? "✅" : "❌";
+  const emoji = areDeepEqual(actual, expected) ? "✅" : "❌";
   let message = `${emoji} ${description} \n`;
 
   if (actual !== expected) {
@@ -55,11 +90,19 @@ function testsForStrings() {
   decodeTheInput("including special characters", "7:!hello#", "!hello#");
 }
 
+function testsForArrays() {
+  console.log("Arrays");
+  console.log(underline("arrays"));
+  decodeTheInput("empty list", "le", []);
+  decodeTheInput("empty list", "l1:ae", ["a"]);
+}
+
 function testsToDecode() {
   console.log("Decoding");
   console.log(underline("Decoding"));
   testsForIntegers();
   testsForStrings();
+  testsForArrays();
 }
 
 testsToDecode();
