@@ -1,9 +1,20 @@
-function encode(input) {
-  if (typeof input === "number") {
-    return "i" + input + "e";
+function encodeArray(input) {
+  let result = "";
+
+  for (let index = 0; index < input.length; index++) {
+    let encodedData = encode(input[index]);
+    result += encodedData;
   }
 
-  return input.length + ":" + input;
+  return result;
+}
+
+function encode(input) {
+  switch (typeof input) {
+    case "number" : return "i" + input + "e";
+    case "string" : return input.length + ":" + input;
+    case "object" : return "l" + encodeArray(input) + "e";
+  }
 }
 
 function composeMessage(description, actual, expected) {
@@ -46,5 +57,23 @@ function testsForStrings() {
   encodeTheInput("including special characters", "!hello#", "7:!hello#");
 }
 
-testsForIntegers();
-testsForStrings();
+function testsForArrays() {
+  console.log("Arrays");
+  console.log(underline("Arrays"));
+  encodeTheInput("empty array", [], "le");
+  encodeTheInput("single element array", ["a"], "l1:ae");
+  encodeTheInput("two elements array", ["a", 1], "l1:ai1ee");
+  encodeTheInput("nested array", ["a", [1]], "l1:ali1eee");
+  encodeTheInput("empty nested array", ["a", 1, []], "l1:ai1elee");
+  encodeTheInput("two level nested array", ["one", ["two", ["three"]]], "l3:onel3:twol5:threeeee");
+}
+
+function testsToEncode() {
+  console.log("Encoding");
+  console.log(underline("Encoding"));
+  testsForIntegers();
+  testsForStrings();
+  testsForArrays();
+}
+
+testsToEncode();
