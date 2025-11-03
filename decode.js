@@ -10,6 +10,12 @@ function decodeString(input) {
 
 function decodeList(input) {
   const decodedArray = [];
+  const changedInput = input.slice(1, input.length - 1);
+
+  if (changedInput !== "") {
+    decodedArray.push(decode(changedInput));
+  }
+  
   return decodedArray;
 }
 
@@ -94,7 +100,8 @@ function testsForArrays() {
   console.log("Arrays");
   console.log(underline("arrays"));
   decodeTheInput("empty list", "le", []);
-  decodeTheInput("empty list", "l1:ae", ["a"]);
+  decodeTheInput("list contains number", "li1ee", [1]);
+  decodeTheInput("list contains alphabet", "l1:ae", ["a"]);
 }
 
 function testsToDecode() {
